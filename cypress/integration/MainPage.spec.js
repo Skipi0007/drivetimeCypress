@@ -30,6 +30,7 @@ describe('Main page', () => {
     cy.checkUrlEq(data.urls.searchCars)
     cy.clickMainLogo()
     cy.checkUrlEq(data.urls.mainPage)
+    cy.screenshot()
   })
     
 })

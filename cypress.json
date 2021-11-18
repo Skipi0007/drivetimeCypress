@@ -1,9 +1,6 @@
 {
     "baseUrl": "https://www.drivetime.com/",
     "viewportHeight": 1080,
-    "viewportWidth": 1920,
-    "scripts": {
-        "cy:run:chrome": "cypress run --browser chrome",
-        "cy:run:firefox": "cypress run --browser firefox"
-      }
+    "viewportWidth": 1920
+    
 }

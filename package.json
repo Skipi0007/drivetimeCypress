@@ -4,5 +4,9 @@
   },
   "dependencies": {
     "cypress-react-selector": "^2.3.13"
+  },
+  "scripts": {
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox"
   }
 }

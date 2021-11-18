@@ -13,21 +13,21 @@ beforeEach(() => {
   describe('Search cars page', () => {
   
       it('Cars searching by State check', () => {
-        cy.fillSearchInput(data.dealerships.state)
+        cy.fillSearchInput(data.dealershipsData.state)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResOnDealerPage(data.dealershipSelectors.state, data.dealerships.expectedState)
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.state, data.dealershipsData.expectedState)
       })
 
       it('Cars searching by City check', () => {
-        cy.fillSearchInput(data.dealerships.city)
+        cy.fillSearchInput(data.dealershipsData.city)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResOnDealerPage(data.dealershipSelectors.city, data.dealerships.city)
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.city, data.dealershipsData.city)
       })
 
       it('Cars searching by Zip code check', () => {
-        cy.fillSearchInput(data.dealerships.zipCode2)
+        cy.fillSearchInput(data.dealershipsData.zipCode2)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResOnDealerPage(data.dealershipSelectors.zipCode, data.dealerships.zipCode2)
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.zipCode, data.dealershipsData.zipCode2)
       })
 
       it('Sorting search results', () => {
@@ -36,7 +36,7 @@ beforeEach(() => {
         const sortMilesLtH = 'Miles (Low to High)'
         const buic = 'Buick'
 
-        cy.fillSearchInput(data.dealerships.city)
+        cy.fillSearchInput(data.dealershipsData.city)
         cy.addSearchCriterialAndSave('Make & Model', buic)
         cy.waitForSearchResults()
 
@@ -91,7 +91,7 @@ beforeEach(() => {
       it('Cars searching by any two params', () => {
           const maker = 'Audi'
           const model = 'A3'
-        cy.fillSearchInput(data.dealerships.city)
+        cy.fillSearchInput(data.dealershipsData.city)
         cy.waitForSearchResults()
         cy.chooseMakerAndModel(maker, model)
 
