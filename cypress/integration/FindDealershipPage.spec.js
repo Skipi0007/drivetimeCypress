@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import {data} from '../../test-data/selectorsData'
+import {data} from '../test-data/selectorsData'
 
 beforeEach(() => {
   cy.visitFindDealership()
