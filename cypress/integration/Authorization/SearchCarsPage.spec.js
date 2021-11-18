@@ -35,39 +35,49 @@ beforeEach(() => {
         cy.fillSearchInput(data.dealerships.city)
         cy.addSearchCriterialAndSave('Make & Model', 'Buick')
         cy.waitForSearchResults()
-        // cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
-        //     cy.get('.content-clickable').each(() => {
-        //         cy.get('[itemprop="manufacturer"]').should('contain', 'Buick')
-        //     })
-        // })
+
         cy.contains('.value-container', 'DriveTime Plus').click()
         cy.contains('.option', 'Price (High to Low)').click()
+        cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
-            cy.get('.content-clickable').each(() => {
-                cy.get('.gt-price').then(value => {
+            cy.get('.gt-price').each((value) => {
+                let currentValue
                     if (prevValue !== null) {
-                        let currentValue = parseInt(value.text().split('$').slice(1).split(',').slice(1), 10)
-                        console.log(currentValue)
-                        expect(currentValue).above(prevValue)
+                        currentValue =(value.text().split('$')[1].split(','))
+                        currentValue = parseInt(currentValue[0]+currentValue[1], 10)
+                        console.log(currentValue, prevValue)
+                        expect(currentValue<prevValue || currentValue===prevValue).to.be.true
+                        prevValue=currentValue
+                    } else{
+                        currentValue =(value.text().split('$')[1].split(','))
+                        currentValue = parseInt(currentValue[0]+currentValue[1], 10)
+                        console.log(currentValue, prevValue)
                         prevValue=currentValue
                     }
-                })
             })
 
         })
-        cy.contains('.value-container', 'DriveTime Plus').click()
+        cy.contains('.value-container', 'Price (High to Low)').click({force: true})
         cy.contains('.option', 'Miles (Low to High)').click()
+        cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
-            cy.get('.content-clickable').each(() => {
-                cy.get('.odometer-reading').then(value => {
-                    if (prevValue !== null) {
-                        let currentValue = parseInt(value.text(), 10)
-                        expect(currentValue).above(prevValue)
-                        prevValue=currentValue
-                    }
-                })
+            cy.get('.odometer-reading').each((value) => {
+                console.log(value)
+                        let currentValue
+                        if (prevValue !== null) {
+                            currentValue =(value.text().split(','))
+                            currentValue = parseInt(currentValue[0]+currentValue[1], 10)   
+                            expect(currentValue>prevValue || currentValue===prevValue).to.be.true
+                            console.log(currentValue, prevValue)   
+                            prevValue=currentValue
+                        }else{
+                            currentValue =(value.text().split(','))
+                            currentValue = parseInt(currentValue[0]+currentValue[1], 10)
+                            console.log(currentValue, prevValue)
+                            prevValue=currentValue
+                        }
             })
         })
       })
