@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "cypress": "^6.4.0"
+  },
+  "dependencies": {
+    "cypress-react-selector": "^2.3.13"
+  }
+}
