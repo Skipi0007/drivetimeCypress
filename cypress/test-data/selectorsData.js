@@ -1,19 +1,19 @@
 export const data = {
 
-    header: {
+  mainPageSelectors: {
       searchCars: 'Search Cars',
       dealership: 'Find a Dealership',
       yourCar: 'Value Your Car',
       mainLogo: '.logo',
     },
 
-    mainPageSelectors: {
-      header: '.desktop-header',
-      mainSection: '#main-section',
-      footer:'.site-footer',
-    },
+    // mainPageSelectors: {
+    //   header: '.desktop-header',
+    //   mainSection: '#main-section',
+    //   footer:'.site-footer',
+    // },
 
-    getApproved: {
+    getApprovedData: {
       firstName: 'Ivan',
       lastName: 'Ivanov',
       phoneNumber: '(888) 888-8888',
@@ -27,7 +27,7 @@ export const data = {
       socialNum: '123123123'
     },
 
-    inputSelectors: {
+    getApprovedSelectors: {
       firstName: 'FirstName',
       lastName: 'LastName',
       phoneNumber: 'Phone',
@@ -48,7 +48,7 @@ export const data = {
       findDealership: 'https://www.drivetime.com/used-car-dealers',
     },
 
-    dealerships: {
+    dealershipsData: {
       city: 'Tulsa',
       state: 'California',
       zipCode: '93726',

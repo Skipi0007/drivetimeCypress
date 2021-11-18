@@ -99,7 +99,7 @@ Cypress.Commands.add('visitMainPage', () => {
       cy.get('.checkbox-checkmark')
         .click()
         .parents('.content-container').within(()=>{
-          cy.contains('.text-before', 'Save').click()
+          cy.clickBtn('Save')
         })
       })
   })
@@ -117,8 +117,8 @@ Cypress.Commands.add('visitMainPage', () => {
       })
       cy.contains('.tab-title', 'Select Makes')
       .parents('.content-container').within(()=>{
-              cy.contains('.text-before', 'Save').click()
-            })
+        cy.clickBtn('Save')
+      })
   })
 
   Cypress.Commands.add('waitForSearchResults', () => {
@@ -131,9 +131,21 @@ Cypress.Commands.add('visitMainPage', () => {
     })
     cy.wait(1000)
   })
-
+  Cypress.Commands.add('selectNewSearchFilter', (oldFilter, newFilter) => {
+    cy.contains('.value-container', oldFilter).click()
+    cy.contains('.option', newFilter).click()
+    cy.get('.text-overflow-ellipsis').should('contain', newFilter)
+  })
   
   //checks
+
+  Cypress.Commands.add('waitForOneSearchResponse', () => {
+    intercepter(
+      cy.wait('@POSTsearch').then(xhr => {
+        expect(xhr.response.statusCode).to.eq(200)
+      })
+    )
+  });
 
   Cypress.Commands.add('checkVisibility', (selector) => {
     cy.get(selector)
@@ -154,10 +166,9 @@ Cypress.Commands.add('visitMainPage', () => {
   Cypress.Commands.add('checkSearchDealerResults', (field, expValue) => {
     cy.get('.details-container').eq(0).within(()=>{
       cy.get(`[itemprop="${field}"]`).should('have.text', expValue)
+    })
   })
 
-  Cypress.Commands.add('checkSearchResultsOnDealerPage', (field, expValue) => {
-      cy.get(`[itemprop="${field}"]`).should('have.text', expValue)
-  })
-  
-  })
+  Cypress.Commands.add('checkSearchResOnDealerPage', (field, expValue) => {
+    cy.get(`[itemprop="${field}"]`).should('have.text', expValue)
+})

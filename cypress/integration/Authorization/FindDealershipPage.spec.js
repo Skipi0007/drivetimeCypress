@@ -8,14 +8,17 @@ beforeEach(() => {
 describe('Find dealership page', () => {
 
     it('Dealership searching check', () => {
-        cy.fillSearchInput(data.dealerships.state)
-        cy.checkSearchDealerResults(data.dealershipSelectors.state, 'CA')
+        cy.fillSearchInput(data.dealershipsData.state)
+        cy.waitForOneSearchResponse()
+        cy.checkSearchDealerResults(data.dealershipSelectors.state, data.dealershipsData.expectedState)
 
-        cy.fillSearchInput(data.dealerships.city)
-        cy.checkSearchDealerResults(data.dealershipSelectors.city, data.dealerships.city)
+        cy.fillSearchInput(data.dealershipsData.city)
+        cy.waitForOneSearchResponse()
+        cy.checkSearchDealerResults(data.dealershipSelectors.city, data.dealershipsData.city)
 
-        cy.fillSearchInput(data.dealerships.zipCode)
-        cy.checkSearchDealerResults(data.dealershipSelectors.zipCode, data.dealerships.zipCode)
+        cy.fillSearchInput(data.dealershipsData.zipCode)
+        cy.waitForOneSearchResponse()
+        cy.checkSearchDealerResults(data.dealershipSelectors.zipCode, data.dealershipsData.zipCode)
     })
 
 })

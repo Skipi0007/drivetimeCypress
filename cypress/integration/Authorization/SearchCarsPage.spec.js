@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 import {data} from '../../test-data/selectorsData'
 
+
+
 beforeEach(() => {
     Cypress.Cookies.debug(true)
     cy.visitSearchCars()
@@ -13,31 +15,34 @@ beforeEach(() => {
       it('Cars searching by State check', () => {
         cy.fillSearchInput(data.dealerships.state)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResultsOnDealerPage(data.dealershipSelectors.state, data.dealerships.expectedState)
-        // cy.get('[itemprop="addressRegion"]').should('have.text', 'CA')
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.state, data.dealerships.expectedState)
       })
 
       it('Cars searching by City check', () => {
         cy.fillSearchInput(data.dealerships.city)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResultsOnDealerPage(data.dealershipSelectors.city, data.dealerships.city)
-        // cy.get('[itemprop="addressLocality"]').should('have.text', data.dealerships.city)
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.city, data.dealerships.city)
       })
 
       it('Cars searching by Zip code check', () => {
-        cy.fillSearchInput(data.dealershipSelectors.zipCode)
+        cy.fillSearchInput(data.dealerships.zipCode2)
         cy.clickDealershipInSearchRes()
-        cy.checkSearchResultsOnDealerPage(data.dealershipSelectors.zipCode, data.dealerships.zipCode)
-        // cy.get('[itemprop="postalCode"]').should('have.text', '93726')
+        cy.checkSearchResOnDealerPage(data.dealershipSelectors.zipCode, data.dealerships.zipCode2)
       })
 
-      it.only('Search by two any params', () => {
+      it('Sorting search results', () => {
+        const sortField = 'DriveTime Plus'
+        const sortPriceHtL = 'Price (High to Low)'
+        const sortMilesLtH = 'Miles (Low to High)'
+        const buic = 'Buick'
+
         cy.fillSearchInput(data.dealerships.city)
-        cy.addSearchCriterialAndSave('Make & Model', 'Buick')
+        cy.addSearchCriterialAndSave('Make & Model', buic)
         cy.waitForSearchResults()
 
-        cy.contains('.value-container', 'DriveTime Plus').click()
-        cy.contains('.option', 'Price (High to Low)').click()
+        cy.selectNewSearchFilter(sortField, sortPriceHtL)
+        // contains('.value-container', sortField).click()
+        // cy.contains('.option', sortPriceHtL).click()
         cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
@@ -58,8 +63,9 @@ beforeEach(() => {
             })
 
         })
-        cy.contains('.value-container', 'Price (High to Low)').click({force: true})
-        cy.contains('.option', 'Miles (Low to High)').click()
+        cy.selectNewSearchFilter(sortPriceHtL, sortMilesLtH)
+        // cy.contains('.value-container', sortPriceHtL).click({force: true})
+        // cy.contains('.option', sortMilesLtH).click()
         cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
@@ -82,11 +88,12 @@ beforeEach(() => {
         })
       })
 
-      it('Cars searching by City check', () => {
-        cy.intercept('POST', '**/search').as('POSTsearch')
+      it('Cars searching by any two params', () => {
+          const maker = 'Audi'
+          const model = 'A3'
         cy.fillSearchInput(data.dealerships.city)
         cy.waitForSearchResults()
-        cy.chooseMakerAndModel('Audi', 'A3')
+        cy.chooseMakerAndModel(maker, model)
 
         cy.waitForSearchResults()
         cy.contains('.filter-outer', 'Year').click()
@@ -103,8 +110,8 @@ beforeEach(() => {
         cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             cy.get('.content-clickable').each(() => {
-                cy.get('[itemprop="manufacturer"]').should('contain', 'Audi')
-                cy.get('[itemprop="model"]').should('contain', 'A3')
+                cy.get('[itemprop="manufacturer"]').should('contain', maker)
+                cy.get('[itemprop="model"]').should('contain', model)
                 cy.get('[itemprop="releaseDate"]').then(value =>{
                     const year = parseInt(value.text(), 10)
                     expect(year).above(2017)
