@@ -63,6 +63,7 @@ Cypress.Commands.add('visitMainPage', () => {
   Cypress.Commands.add('fillInputField', (fieldName, value) => {
     cy.get(`input[data-analytics-label="${fieldName}"]`)
         .type(value)
+        .should('contain', value)
   });
 
   Cypress.Commands.add('clickSaveBtn', () => {

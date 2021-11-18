@@ -1,0 +1,176 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-11-18T14:47:22.482Z",
+    "end": "2021-11-18T14:50:07.434Z",
+    "duration": 164952,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a08e7e57-aa53-46a1-889f-399479d7d82d",
+      "title": "",
+      "fullFile": "cypress/integration/SearchCarsPage.spec.js",
+      "file": "cypress/integration/SearchCarsPage.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "69989e53-191a-400c-89f8-c16e38471b1b",
+          "title": "Search cars page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cars searching by State check",
+              "fullTitle": "Search cars page Cars searching by State check",
+              "timedOut": null,
+              "duration": 28669,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.state);\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.state, _selectorsData.data.dealershipsData.expectedState);",
+              "err": {},
+              "uuid": "6a52c12b-08a2-4966-a197-761ffd6ca129",
+              "parentUUID": "69989e53-191a-400c-89f8-c16e38471b1b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by City check",
+              "fullTitle": "Search cars page Cars searching by City check",
+              "timedOut": null,
+              "duration": 23056,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.city, _selectorsData.data.dealershipsData.city);",
+              "err": {},
+              "uuid": "6432b5c7-587d-42f9-b105-0ca33ef72fb2",
+              "parentUUID": "69989e53-191a-400c-89f8-c16e38471b1b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by Zip code check",
+              "fullTitle": "Search cars page Cars searching by Zip code check",
+              "timedOut": null,
+              "duration": 32603,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.zipCode2);\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.zipCode, _selectorsData.data.dealershipsData.zipCode2);",
+              "err": {},
+              "uuid": "17d1116b-12f5-433d-a7dc-d9ea3ece8044",
+              "parentUUID": "69989e53-191a-400c-89f8-c16e38471b1b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sorting search results",
+              "fullTitle": "Search cars page Sorting search results",
+              "timedOut": null,
+              "duration": 43890,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const sortField = 'DriveTime Plus';\nconst sortPriceHtL = 'Price (High to Low)';\nconst sortMilesLtH = 'Miles (Low to High)';\nconst buic = 'Buick';\ncy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.addSearchCriterialAndSave('Make & Model', buic);\ncy.waitForSearchResults();\ncy.selectNewSearchFilter(sortField, sortPriceHtL); // contains('.value-container', sortField).click()\n// cy.contains('.option', sortPriceHtL).click()\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(() => {\n  let prevValue = null;\n  cy.get('.gt-price').each(value => {\n    let currentValue;\n    if (prevValue !== null) {\n      currentValue = value.text().split('$')[1].split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      expect(currentValue < prevValue || currentValue === prevValue).to.be.true;\n      prevValue = currentValue;\n    } else {\n      currentValue = value.text().split('$')[1].split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    }\n  });\n});\ncy.selectNewSearchFilter(sortPriceHtL, sortMilesLtH); // cy.contains('.value-container', sortPriceHtL).click({force: true})\n// cy.contains('.option', sortMilesLtH).click()\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(() => {\n  let prevValue = null;\n  cy.get('.odometer-reading').each(value => {\n    console.log(value);\n    let currentValue;\n    if (prevValue !== null) {\n      currentValue = value.text().split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      expect(currentValue > prevValue || currentValue === prevValue).to.be.true;\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    } else {\n      currentValue = value.text().split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    }\n  });\n});",
+              "err": {},
+              "uuid": "e6057be6-d662-43ad-9a4f-905dc8db4119",
+              "parentUUID": "69989e53-191a-400c-89f8-c16e38471b1b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by any two params",
+              "fullTitle": "Search cars page Cars searching by any two params",
+              "timedOut": null,
+              "duration": 35045,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const maker = 'Audi';\nconst model = 'A3';\ncy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.waitForSearchResults();\ncy.chooseMakerAndModel(maker, model);\ncy.waitForSearchResults();\ncy.contains('.filter-outer', 'Year').click();\ncy.get('.year-filter-container').within(() => {\n  cy.get('.noUi-handle').eq(0).click().type('{rightarrow}'.repeat(12)).click().parents('.content-container').within(() => {\n    cy.clickBtn('Save');\n  });\n});\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(() => {\n  cy.get('.content-clickable').each(() => {\n    cy.get('[itemprop=\"manufacturer\"]').should('contain', maker);\n    cy.get('[itemprop=\"model\"]').should('contain', model);\n    cy.get('[itemprop=\"releaseDate\"]').then(value => {\n      const year = parseInt(value.text(), 10);\n      expect(year).above(2017);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "193e283f-148f-45c5-b785-c719cc19957f",
+              "parentUUID": "69989e53-191a-400c-89f8-c16e38471b1b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6a52c12b-08a2-4966-a197-761ffd6ca129",
+            "6432b5c7-587d-42f9-b105-0ca33ef72fb2",
+            "17d1116b-12f5-433d-a7dc-d9ea3ece8044",
+            "e6057be6-d662-43ad-9a4f-905dc8db4119",
+            "193e283f-148f-45c5-b785-c719cc19957f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 163263,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.0.1"
+    }
+  }
+}

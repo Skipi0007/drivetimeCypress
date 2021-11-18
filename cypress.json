@@ -1,6 +1,7 @@
 {
     "baseUrl": "https://www.drivetime.com/",
     "viewportHeight": 1080,
-    "viewportWidth": 1920
+    "viewportWidth": 1920,
+    "reporter": "mochawesome"
     
 }
