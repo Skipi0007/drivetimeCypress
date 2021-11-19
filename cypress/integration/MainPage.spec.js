@@ -1,41 +1,29 @@
 /// <reference types="cypress" />
 import {data} from '../test-data/selectorsData'
 // const { expect } = require('chai');
-const addContext = require('mochawesome/addContext');
+var addContext = require('mochawesome/addContext');
 
-beforeEach(() => {
+beforeEach(function() {
   cy.visitMainPage()
 })
 
 after(function () {
+
+
   const title = 'Main page -- Main page transitions check.';
   const value = '../screenshots/MainPage.spec.js/Main page -- Main page transitions check.png';
-  addContext(this, {
-    title,
-    value,
-  })
+  addContext('Image','123');
 })
 
-describe('Main page', () => {
+describe('Main page', function() {
 
-  // it('Main page elements check', () => {
-  //   cy.checkVisibility(data.mainPageSelectors.header)
-  //   cy.checkVisibility(data.mainPageSelectors.mainSection)
-  //   cy.checkVisibility(data.mainPageSelectors.footer)   
-  // })
-
-  it('Main page transitions check', () => {
-    cy.intercept('POST', '**/track').as('POSTtreck')
-
+  it('Main page transitions check', function() {
     cy.getScreenshot()
     cy.clickNavCategory(data.mainPageSelectors.dealership)
     cy.checkUrlEq(data.urls.findDealership)
     cy.clickMainLogo()
     cy.checkUrlEq(data.urls.mainPage)
     cy.clickBtn('Get Approved')
-    // cy.wait('@POSTtreck').then(xhr => {
-    //   expect(xhr.response.statusCode).to.eq(200)
-    // })
     cy.checkUrlEq(data.urls.getApproved)
     cy.clickMainLogo()
     cy.checkUrlEq(data.urls.mainPage)
@@ -43,6 +31,7 @@ describe('Main page', () => {
     cy.checkUrlEq(data.urls.searchCars)
     cy.clickMainLogo()
     cy.checkUrlEq(data.urls.mainPage)
+    addContext('Image','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRubndoATUmobCHLp0B1u7Wg_e0i9NYxGUoEg&usqp=CAU');
   })
     
 })

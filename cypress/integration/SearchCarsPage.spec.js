@@ -104,6 +104,7 @@ beforeEach(() => {
                 .type('{rightarrow}'
                 .repeat(12))
                 .click()
+                cy.wait(200)
             cy.get('#slider-snap-value-lower').should('contain', '2018')
                 .parents('.content-container').within(()=>{
             cy.clickBtn('Save')

@@ -79,14 +79,10 @@ Cypress.Commands.add('visitMainPage', () => {
 
   Cypress.Commands.add('fillSearchInput', (value) => {
     intercepter()
-    cy.get('#typeahead-input').clear({force: true}).type(value, {force: true} ).type('{enter}',{force: true})
-    // cy.wait('@POSTsearch').then(xhr => {
-    //   expect(xhr.response.statusCode).to.eq(200)
-    // })
-    // cy.wait('@POSTsearch').then(xhr => {
-    //   expect(xhr.response.statusCode).to.eq(200)
-    // })
-    // cy.wait(1000)
+    cy.get('#typeahead-input')
+      .clear({force: true})
+      .type(value, {force: true} )
+      .type('{enter}',{force: true})
   });
   
   Cypress.Commands.add('clickDealershipInSearchRes', () => {
@@ -131,7 +127,7 @@ Cypress.Commands.add('visitMainPage', () => {
     cy.wait('@POSTsearch').then(xhr => {
       expect(xhr.response.statusCode).to.eq(200)
     })
-    cy.wait(1000)
+    cy.wait(1500)
   })
   Cypress.Commands.add('selectNewSearchFilter', (oldFilter, newFilter) => {
     cy.contains('.value-container', oldFilter).click()
@@ -140,11 +136,11 @@ Cypress.Commands.add('visitMainPage', () => {
   })
 
   Cypress.Commands.add('getScreenshot', () => {
-    const addContext = require('mochawesome/addContext');
+    // const addContext = require('mochawesome/addContext');
     if (scteenShotStatus === true){
       cy.screenshot().then(value => {
         // console.log(value)
-        addContext(this, value);
+        // addContext(this, value);
       })
       
     } else{}

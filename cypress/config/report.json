@@ -6,8 +6,9 @@
     "reporterOptions": {
         "reportDir": "cypress/results/specs",
         "overwrite": false,
-        "html": false,
-        "json": true
+        "html": true,
+        "json": true,
+        "inline": true
       },
 
     "screenShots": true
