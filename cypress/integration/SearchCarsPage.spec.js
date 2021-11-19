@@ -14,18 +14,21 @@ beforeEach(() => {
   
       it('Cars searching by State check', () => {
         cy.fillSearchInput(data.dealershipsData.state)
+        cy.waitForSearchResults()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.state, data.dealershipsData.expectedState)
       })
 
       it('Cars searching by City check', () => {
         cy.fillSearchInput(data.dealershipsData.city)
+        cy.waitForSearchResults()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.city, data.dealershipsData.city)
       })
 
       it('Cars searching by Zip code check', () => {
         cy.fillSearchInput(data.dealershipsData.zipCode2)
+        cy.waitForSearchResults()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.zipCode, data.dealershipsData.zipCode2)
       })
@@ -37,12 +40,11 @@ beforeEach(() => {
         const buic = 'Buick'
 
         cy.fillSearchInput(data.dealershipsData.city)
+        cy.waitForSearchResults()
         cy.addSearchCriterialAndSave('Make & Model', buic)
         cy.waitForSearchResults()
 
         cy.selectNewSearchFilter(sortField, sortPriceHtL)
-        // contains('.value-container', sortField).click()
-        // cy.contains('.option', sortPriceHtL).click()
         cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
@@ -64,8 +66,6 @@ beforeEach(() => {
 
         })
         cy.selectNewSearchFilter(sortPriceHtL, sortMilesLtH)
-        // cy.contains('.value-container', sortPriceHtL).click({force: true})
-        // cy.contains('.option', sortMilesLtH).click()
         cy.waitForSearchResults()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null

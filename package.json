@@ -10,6 +10,9 @@
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
     "cy:run:report": "cypress run --reporter mochawesome --env configFile=report",
-    "cy:run:main": "cypress open --env configFile=main"
+    "cy:run:main": "cypress open --env configFile=main",
+    "merge:reports": "mochawesome-merge 'cypress/results/specs/*.json' > cypress/results/mochawesome.json",
+    "generete:report": "marge cypress/results/mochawesome.json --reportDir cypress/results --reportFilename index.html",
+    "test:mochareport": "yarn cy:run:report && yarn merge:reports && yarn generete:report" 
   }
 }
