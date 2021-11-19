@@ -99,12 +99,14 @@ beforeEach(() => {
         cy.contains('.filter-outer', 'Year').click()
         cy.get('.year-filter-container').within(()=> {
             cy.get('.noUi-handle')
-            .eq(0)
-            .click()
-            .type('{rightarrow}'.repeat(12))
-            .click()
-            .parents('.content-container').within(()=>{
-                cy.clickBtn('Save')
+                .eq(0)
+                .click()
+                .type('{rightarrow}'
+                .repeat(12))
+                .click()
+            cy.get('#slider-snap-value-lower').should('contain', '2018')
+                .parents('.content-container').within(()=>{
+            cy.clickBtn('Save')
             })
         })
         cy.waitForSearchResults()

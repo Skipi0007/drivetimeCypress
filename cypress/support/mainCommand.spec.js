@@ -3,6 +3,8 @@
 // import cypress = require("cypress");
 
 //actions
+const scteenShotStatus = Cypress.config().screenShots
+// Cypress.config.env('screenShots');
 const intercepter = () => {
   return cy.intercept('POST', '**/track').as('POSTtrack'),
          cy.intercept('POST', '**/search').as('POSTsearch'),
@@ -63,7 +65,6 @@ Cypress.Commands.add('visitMainPage', () => {
   Cypress.Commands.add('fillInputField', (fieldName, value) => {
     cy.get(`input[data-analytics-label="${fieldName}"]`)
         .type(value)
-        .should('contain', value)
   });
 
   Cypress.Commands.add('clickSaveBtn', () => {
@@ -79,13 +80,13 @@ Cypress.Commands.add('visitMainPage', () => {
   Cypress.Commands.add('fillSearchInput', (value) => {
     intercepter()
     cy.get('#typeahead-input').clear({force: true}).type(value, {force: true} ).type('{enter}',{force: true})
-    cy.wait('@POSTsearch').then(xhr => {
-      expect(xhr.response.statusCode).to.eq(200)
-    })
-    cy.wait('@POSTsearch').then(xhr => {
-      expect(xhr.response.statusCode).to.eq(200)
-    })
-    cy.wait(1000)
+    // cy.wait('@POSTsearch').then(xhr => {
+    //   expect(xhr.response.statusCode).to.eq(200)
+    // })
+    // cy.wait('@POSTsearch').then(xhr => {
+    //   expect(xhr.response.statusCode).to.eq(200)
+    // })
+    // cy.wait(1000)
   });
   
   Cypress.Commands.add('clickDealershipInSearchRes', () => {
@@ -137,15 +138,27 @@ Cypress.Commands.add('visitMainPage', () => {
     cy.contains('.option', newFilter).click()
     cy.get('.text-overflow-ellipsis').should('contain', newFilter)
   })
+
+  Cypress.Commands.add('getScreenshot', () => {
+    const addContext = require('mochawesome/addContext');
+    if (scteenShotStatus === true){
+      cy.screenshot().then(value => {
+        // console.log(value)
+        addContext(this, value);
+      })
+      
+    } else{}
+  })
+  
   
   //checks
 
   Cypress.Commands.add('waitForOneSearchResponse', () => {
-    intercepter(
-      cy.wait('@POSTsearch').then(xhr => {
-        expect(xhr.response.statusCode).to.eq(200)
-      })
-    )
+    intercepter()
+    cy.wait('@POSTsearch').then(xhr => {
+      expect(xhr.response.statusCode).to.eq(200)
+    })
+    cy.wait(1000)
   });
 
   Cypress.Commands.add('checkVisibility', (selector) => {

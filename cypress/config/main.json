@@ -1,0 +1,21 @@
+{
+    "baseUrl": "https://www.drivetime.com/",
+    "viewportHeight": 1080,
+    "viewportWidth": 1920,
+    "reporter": "mochawesome",
+    "env": {
+        "screenShots": false
+    },
+    "screenShots": true,
+    "screenshotConfig": {
+        "blackout": [],
+        "clip": null,
+        "disableTimersAndAnimations": true,
+        "log": true,
+        "scale": false,
+        "timeout": 30000
+    },
+    "screenshotOnRunFailure": false, 
+    "videoCompression": false
+    
+}

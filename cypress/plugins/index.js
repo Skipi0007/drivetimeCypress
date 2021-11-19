@@ -15,7 +15,21 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+
+ const path = require('path')
+ const fs = require('fs-extra')
+
+ function getConfigurationByFile(file) {
+  const pathToConfigFile = path.resolve('..', 'DriverTime/cypress/config', `${file}.json`)
+
+  return fs.readJson(pathToConfigFile)
+}
+
 module.exports = (on, config) => {
+  
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  const file = config.env.configFile || 'main'
+
+  return getConfigurationByFile(file)
 }

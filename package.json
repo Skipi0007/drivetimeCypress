@@ -9,6 +9,7 @@
   "scripts": {
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
-    "cy:run:report": "npx cypress run --reporter mochawesome"
+    "cy:run:report": "cypress run --reporter mochawesome --env configFile=report",
+    "cy:run:main": "cypress open --env configFile=main"
   }
 }

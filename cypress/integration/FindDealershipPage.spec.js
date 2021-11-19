@@ -9,7 +9,7 @@ describe('Find dealership page', () => {
 
     it('Dealership searching check', () => {
         cy.fillSearchInput(data.dealershipsData.state)
-        cy.waitForOneSearchResponse()
+        cy.waitForSearchResults()
         cy.checkSearchDealerResults(data.dealershipSelectors.state, data.dealershipsData.expectedState)
 
         cy.fillSearchInput(data.dealershipsData.city)
