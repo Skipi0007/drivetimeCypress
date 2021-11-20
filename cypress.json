@@ -3,6 +3,13 @@
     "viewportHeight": 1080,
     "viewportWidth": 1920,
     "reporter": "mochawesome",
+    "reporterOptions": {
+        "reportDir": "cypress/results/specs",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "inline": true
+      },
     "scteenShots": false,
     "screenshotOnRunFailure": false, 
     "videoCompression": false,

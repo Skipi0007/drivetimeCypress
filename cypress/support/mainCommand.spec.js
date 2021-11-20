@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
 
-// import cypress = require("cypress");
-
 //actions
 const scteenShotStatus = Cypress.config().screenShots
-// Cypress.config.env('screenShots');
+
 const intercepter = () => {
   return cy.intercept('POST', '**/track').as('POSTtrack'),
          cy.intercept('POST', '**/search').as('POSTsearch'),
@@ -136,13 +134,9 @@ Cypress.Commands.add('visitMainPage', () => {
   })
 
   Cypress.Commands.add('getScreenshot', () => {
-    // const addContext = require('mochawesome/addContext');
+    const addContext = require('mochawesome/addContext');
     if (scteenShotStatus === true){
-      cy.screenshot().then(value => {
-        // console.log(value)
-        // addContext(this, value);
-      })
-      
+      cy.screenshot()
     } else{}
   })
   

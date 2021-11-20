@@ -6,6 +6,7 @@ node_modules/
 cypress/screenshots/*
 cypress/videos/*
 cypress/downloads/*
+cypress/results/*
 coverage/*
 .nyc_output/*
 cypress-testrail-reporter/*
