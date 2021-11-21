@@ -6,6 +6,7 @@
     "mochawesome-report-generator": "^6.0.1"
   },
   "dependencies": {
+    "cypress-multi-reporters": "^1.5.0",
     "cypress-react-selector": "^2.3.13"
   },
   "scripts": {
@@ -13,9 +14,22 @@
     "cy:run:firefox": "cypress run --browser firefox",
     "cy:open:report": "cypress open --reporter mochawesome --env configFile=report",
     "cy:run:report": "cypress run --reporter mochawesome --env configFile=report",
+    "cy:run: singleReport": "cypress run --spec \"cypress/integration/SearchCarsPage.spec.js\" --reporter mochawesome --env configFile=report",
     "cy:run:main": "cypress open --env configFile=main",
     "merge:reports": "mochawesome-merge 'cypress/results/specs/*.json' > cypress/results/mochawesome.json",
-    "generete:report": "marge cypress/results/mochawesome.json --reportDir cypress/results --reportFilename index.pdf",
-    "test:mochareport": "yarn cy:run:report && yarn merge:reports && yarn generete:report"
+    "generete:report": "marge cypress/results/mochawesome.json --reportDir cypress/results --reportFilename index.html",
+    "test:mochareport": "yarn cy:run:report && yarn merge:reports && yarn generete:report",
+
+    "merge:report": "mochawesome-merge 'cypress/reports/mocha/*.json' > cypress/reports/mocha/mochawesome_main.json",
+    "generete:repo": "marge cypress/reports/mocha/mochawesome_main.json --reportDir cypress/reports/mocha --reportFilename index.html",
+    
+      "clean:reports": "rm -R -f cypress/reports && mkdir cypress/reports && mkdir cypress/reports/mochareports ",
+      "pretest": "npm run clean:reports",
+      "scripts": "cypress run",
+      "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+      "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports -- inline",
+      "posttest": "npm run combine-reports && npm run generate-report",
+      "test" : "npm run scripts || npm run posttest"
+    
   }
 }

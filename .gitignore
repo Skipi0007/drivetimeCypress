@@ -7,6 +7,7 @@ cypress/screenshots/*
 cypress/videos/*
 cypress/downloads/*
 cypress/results/*
+cypress/reports/*
 coverage/*
 .nyc_output/*
 cypress-testrail-reporter/*

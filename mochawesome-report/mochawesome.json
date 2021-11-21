@@ -1,0 +1,190 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 4,
+    "pending": 0,
+    "failures": 1,
+    "start": "2021-11-20T14:38:06.151Z",
+    "end": "2021-11-20T14:39:16.095Z",
+    "duration": 69944,
+    "testsRegistered": 5,
+    "passPercent": 80,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6439ce72-619f-4e9a-8fcc-28b5f8d80de3",
+      "title": "",
+      "fullFile": "cypress/integration/SearchCarsPage.spec.js",
+      "file": "cypress/integration/SearchCarsPage.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+          "title": "Search cars page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cars searching by State check",
+              "fullTitle": "Search cars page Cars searching by State check",
+              "timedOut": null,
+              "duration": 16028,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "\"assets/SearchCarsPage.spec.js/Search cars page --       Cars searching by State check (failed).png\"",
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.state);\ncy.waitForSearchResults();\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.state, _selectorsData.data.dealershipsData.expectedState);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<span>' to have text 'CA', but the text was 'TX'",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<span>' to have text 'CA', but the text was 'TX'\n    at Context.eval (https://www.drivetime.com/__cypress/tests?p=cypress/support/index.js:426:47)",
+                "diff": "- 'TX'\n+ 'CA'\n"
+              },
+              "uuid": "e34f4186-88cf-40bc-84b9-dac9fd56afd7",
+              "parentUUID": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by City check",
+              "fullTitle": "Search cars page Cars searching by City check",
+              "timedOut": null,
+              "duration": 10586,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.waitForSearchResults();\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.city, _selectorsData.data.dealershipsData.city);",
+              "err": {},
+              "uuid": "260cd3df-658f-4b0f-bb20-2cf41cc536da",
+              "parentUUID": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by Zip code check",
+              "fullTitle": "Search cars page Cars searching by Zip code check",
+              "timedOut": null,
+              "duration": 9465,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fillSearchInput(_selectorsData.data.dealershipsData.zipCode2);\ncy.waitForSearchResults();\ncy.clickDealershipInSearchRes();\ncy.checkSearchResOnDealerPage(_selectorsData.data.dealershipSelectors.zipCode, _selectorsData.data.dealershipsData.zipCode2);",
+              "err": {},
+              "uuid": "b50af7d3-c9e5-4279-b593-5b1dcc1e4b61",
+              "parentUUID": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sorting search results",
+              "fullTitle": "Search cars page Sorting search results",
+              "timedOut": null,
+              "duration": 17746,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var sortField = 'DriveTime Plus';\nvar sortPriceHtL = 'Price (High to Low)';\nvar sortMilesLtH = 'Miles (Low to High)';\nvar buic = 'Buick';\ncy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.waitForSearchResults();\ncy.addSearchCriterialAndSave('Make & Model', buic);\ncy.waitForSearchResults();\ncy.selectNewSearchFilter(sortField, sortPriceHtL);\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(function () {\n  var prevValue = null;\n  cy.get('.gt-price').each(function (value) {\n    var currentValue;\n    if (prevValue !== null) {\n      currentValue = value.text().split('$')[1].split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      expect(currentValue < prevValue || currentValue === prevValue).to.be[\"true\"];\n      prevValue = currentValue;\n    } else {\n      currentValue = value.text().split('$')[1].split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    }\n  });\n});\ncy.selectNewSearchFilter(sortPriceHtL, sortMilesLtH);\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(function () {\n  var prevValue = null;\n  cy.get('.odometer-reading').each(function (value) {\n    console.log(value);\n    var currentValue;\n    if (prevValue !== null) {\n      currentValue = value.text().split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      expect(currentValue > prevValue || currentValue === prevValue).to.be[\"true\"];\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    } else {\n      currentValue = value.text().split(',');\n      currentValue = parseInt(currentValue[0] + currentValue[1], 10);\n      console.log(currentValue, prevValue);\n      prevValue = currentValue;\n    }\n  });\n});",
+              "err": {},
+              "uuid": "6b2e2850-c461-4cc7-8a0f-07c720116bcc",
+              "parentUUID": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cars searching by any two params",
+              "fullTitle": "Search cars page Cars searching by any two params",
+              "timedOut": null,
+              "duration": 15681,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var maker = 'Audi';\nvar model = 'A3';\ncy.fillSearchInput(_selectorsData.data.dealershipsData.city);\ncy.waitForSearchResults();\ncy.chooseMakerAndModel(maker, model);\ncy.waitForSearchResults();\ncy.contains('.filter-outer', 'Year').click();\ncy.get('.year-filter-container').within(function () {\n  cy.get('.noUi-handle').eq(0).click().type('{rightarrow}'.repeat(12)).click();\n  cy.wait(200);\n  cy.get('#slider-snap-value-lower').should('contain', '2018').parents('.content-container').within(function () {\n    cy.clickBtn('Save');\n  });\n});\ncy.waitForSearchResults();\ncy.get('[dtmintersectionobserverlist]').eq(0).within(function () {\n  cy.get('.content-clickable').each(function () {\n    cy.get('[itemprop=\"manufacturer\"]').should('contain', maker);\n    cy.get('[itemprop=\"model\"]').should('contain', model);\n    cy.get('[itemprop=\"releaseDate\"]').then(function (value) {\n      var year = parseInt(value.text(), 10);\n      expect(year).above(2017);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "76d6a2ae-461b-43e5-aaa8-1a57377b4d04",
+              "parentUUID": "323756af-1c94-4950-8c9b-a223e3ceb56a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "260cd3df-658f-4b0f-bb20-2cf41cc536da",
+            "b50af7d3-c9e5-4279-b593-5b1dcc1e4b61",
+            "6b2e2850-c461-4cc7-8a0f-07c720116bcc",
+            "76d6a2ae-461b-43e5-aaa8-1a57377b4d04"
+          ],
+          "failures": [
+            "e34f4186-88cf-40bc-84b9-dac9fd56afd7"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 69506,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+          "reportDir": "cypress/reports/mocha",
+          "quite": true,
+          "overwrite": false,
+          "html": true,
+          "json": true
+        }
+      },
+      "version": "6.0.1"
+    }
+  }
+}

@@ -16,7 +16,8 @@ describe('Get approved page', () => {
         cy.checkInputField(data.getApprovedSelectors.firstName, data.getApprovedData.firstName)
         cy.checkInputField(data.getApprovedSelectors.lastName, data.getApprovedData.lastName)
         cy.checkInputField(data.getApprovedSelectors.zipCode, data.getApprovedData.zipCode)
-        cy.checkInputField(data.getApprovedSelectors.phoneNumber, data.getApprovedData.phoneNumber) 
+        cy.checkInputField(data.getApprovedSelectors.phoneNumber, data.getApprovedData.phoneNumber)
+        cy.getScreenshot() 
     })
 
 })

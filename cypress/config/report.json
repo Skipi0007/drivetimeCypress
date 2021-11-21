@@ -2,15 +2,20 @@
     "baseUrl": "https://www.drivetime.com/",
     "viewportHeight": 1080,
     "viewportWidth": 1920,
-    "reporter": "mochawesome",
+    "screenshotOnRunFailure": true,
+    "reporter": "cypress-multi-reporters",
     "reporterOptions": {
-        "reportDir": "cypress/results/specs",
-        "overwrite": false,
-        "html": true,
-        "json": true,
-        "inline": true
-      },
-
-    "screenShots": true
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/reports/mocha",
+            "quite": true,
+            "overwrite": false,
+            "html": true,
+            "json": true
+        }
+    },
+    "screenShots": true,
+    "screenshotsFolder": "cypress/reports/mocha/assets",
+    "MainPage.spec.js": 7
 
 }

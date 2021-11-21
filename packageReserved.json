@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "cypress": "^6.4.0",
+    "mochawesome": "^7.0.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^6.0.1"
+  },
+  "dependencies": {
+    "cypress-multi-reporters": "^1.5.0",
+    "cypress-react-selector": "^2.3.13"
+  },
+  "scripts": {
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:open:report": "cypress open --reporter mochawesome --env configFile=report",
+    "cy:run:report": "cypress run --reporter mochawesome --env configFile=report",
+    "cy:run: singleReport": "cypress run --spec \"cypress/integration/MainPage.spec.js\" --reporter mochawesome --env configFile=report",
+    "cy:run:main": "cypress open --env configFile=main",
+    "merge:reports": "mochawesome-merge 'cypress/results/specs/*.json' > cypress/results/mochawesome.json",
+    "generete:report": "marge cypress/results/mochawesome.json --reportDir cypress/results --reportFilename index.pdf",
+    "test:mochareport": "yarn cy:run:report && yarn merge:reports && yarn generete:report"
+  }
+}

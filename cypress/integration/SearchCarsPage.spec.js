@@ -15,22 +15,28 @@ beforeEach(() => {
       it('Cars searching by State check', () => {
         cy.fillSearchInput(data.dealershipsData.state)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.state, data.dealershipsData.expectedState)
+        cy.getScreenshot()
       })
 
       it('Cars searching by City check', () => {
         cy.fillSearchInput(data.dealershipsData.city)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.city, data.dealershipsData.city)
+        cy.getScreenshot()
       })
 
       it('Cars searching by Zip code check', () => {
         cy.fillSearchInput(data.dealershipsData.zipCode2)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.clickDealershipInSearchRes()
         cy.checkSearchResOnDealerPage(data.dealershipSelectors.zipCode, data.dealershipsData.zipCode2)
+        cy.getScreenshot()
       })
 
       it('Sorting search results', () => {
@@ -44,8 +50,10 @@ beforeEach(() => {
         cy.addSearchCriterialAndSave('Make & Model', buic)
         cy.waitForSearchResults()
 
+        cy.getScreenshot()
         cy.selectNewSearchFilter(sortField, sortPriceHtL)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
             cy.get('.gt-price').each((value) => {
@@ -67,6 +75,7 @@ beforeEach(() => {
         })
         cy.selectNewSearchFilter(sortPriceHtL, sortMilesLtH)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             let prevValue = null
             cy.get('.odometer-reading').each((value) => {
@@ -93,9 +102,11 @@ beforeEach(() => {
           const model = 'A3'
         cy.fillSearchInput(data.dealershipsData.city)
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.chooseMakerAndModel(maker, model)
 
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.contains('.filter-outer', 'Year').click()
         cy.get('.year-filter-container').within(()=> {
             cy.get('.noUi-handle')
@@ -111,6 +122,7 @@ beforeEach(() => {
             })
         })
         cy.waitForSearchResults()
+        cy.getScreenshot()
         cy.get('[dtmintersectionobserverlist]').eq(0).within(()=>{
             cy.get('.content-clickable').each(() => {
                 cy.get('[itemprop="manufacturer"]').should('contain', maker)
@@ -122,6 +134,7 @@ beforeEach(() => {
             })
 
         })
+        cy.getScreenshot()
       })
   
   })

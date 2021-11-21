@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import addContext from "mochawesome/addContext";
+
 //actions
 const scteenShotStatus = Cypress.config().screenShots
 
@@ -80,6 +82,8 @@ Cypress.Commands.add('visitMainPage', () => {
     cy.get('#typeahead-input')
       .clear({force: true})
       .type(value, {force: true} )
+    cy.wait(200)
+    cy.get('#typeahead-input')
       .type('{enter}',{force: true})
   });
   
@@ -133,8 +137,7 @@ Cypress.Commands.add('visitMainPage', () => {
     cy.get('.text-overflow-ellipsis').should('contain', newFilter)
   })
 
-  Cypress.Commands.add('getScreenshot', () => {
-    const addContext = require('mochawesome/addContext');
+  Cypress.Commands.add('getScreenshot', function() {
     if (scteenShotStatus === true){
       cy.screenshot()
     } else{}
